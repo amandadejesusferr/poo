@@ -35,3 +35,4 @@ lib/
 .DS_Store
 .idea/
 .scannerwork/
+node_modules/
