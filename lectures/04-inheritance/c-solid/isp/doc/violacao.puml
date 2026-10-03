@@ -1,0 +1,27 @@
+@startuml
+title ISP — Violação
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Aplicacao
+interface PlataformaNotificacoes {
+  +enviarEmail(destinatario: String, mensagem: String): void
+  +enviarSms(numero: String, mensagem: String): void
+  +enviarPush(dispositivoId: String, mensagem: String): void
+}
+class GatewaySms {
+  +enviarEmail(...): void
+  +enviarSms(...): void
+  +enviarPush(...): void
+}
+
+Aplicacao ..> PlataformaNotificacoes : usa
+GatewaySms ..|> PlataformaNotificacoes
+note right of GatewaySms
+  Violação do ISP:
+  GatewaySms é obrigado a depender
+  de operações que não suporta;
+  duas delas lançam exceção.
+end note
+@enduml

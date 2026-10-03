@@ -1,0 +1,28 @@
+@startuml
+title DIP — Violação
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Aplicacao
+class ServicoRelatorioVendas {
+  +gerarResumoMensal(ano: int, mes: int): String
+}
+class RepositorioVendasMySql {
+  +buscarPorMes(ano: int, mes: int): List<Venda>
+}
+class Venda {
+  -data: LocalDate
+  -valor: double
+}
+
+Aplicacao ..> ServicoRelatorioVendas
+ServicoRelatorioVendas ..> RepositorioVendasMySql : instancia diretamente
+RepositorioVendasMySql ..> Venda
+note right of ServicoRelatorioVendas
+  Violação do DIP:
+  o serviço de alto nível cria e
+  conhece diretamente o detalhe
+  concreto de persistência MySQL.
+end note
+@enduml

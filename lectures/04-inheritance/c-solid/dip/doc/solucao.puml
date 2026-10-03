@@ -1,0 +1,36 @@
+@startuml
+title DIP — Solução
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Aplicacao
+class ServicoRelatorioVendas {
+  -repositorio: RepositorioVendas
+  +ServicoRelatorioVendas(repositorio: RepositorioVendas)
+  +gerarResumoMensal(ano: int, mes: int): String
+}
+interface RepositorioVendas {
+  +buscarPorMes(ano: int, mes: int): List<Venda>
+}
+class RepositorioVendasMySql
+class RepositorioVendasMemoria
+class Venda {
+  -data: LocalDate
+  -valor: double
+}
+
+Aplicacao ..> ServicoRelatorioVendas : injeta dependência
+Aplicacao ..> RepositorioVendasMySql
+Aplicacao ..> RepositorioVendasMemoria
+ServicoRelatorioVendas ..> RepositorioVendas : abstração
+RepositorioVendasMySql ..|> RepositorioVendas
+RepositorioVendasMemoria ..|> RepositorioVendas
+RepositorioVendas ..> Venda
+note right of ServicoRelatorioVendas
+  Solução DIP:
+  o serviço depende da abstração
+  e recebe a implementação por
+  injeção de dependência.
+end note
+@enduml

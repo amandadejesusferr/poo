@@ -1,0 +1,28 @@
+@startuml
+title OCP — Violação
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Aplicacao {
+  +main(args: String[]): void
+}
+class Produto {
+  -nome: String
+  -categoria: String
+  -valorBase: double
+}
+class CalculadoraDesconto {
+  +aplicar(categoria: String, valorBase: double): double
+}
+
+Aplicacao ..> Produto : cria
+Aplicacao ..> CalculadoraDesconto : usa
+CalculadoraDesconto ..> Produto : recebe dados
+note right of CalculadoraDesconto
+  Violação do OCP:
+  o switch precisa ser alterado
+  sempre que uma categoria ou
+  regra de desconto é adicionada.
+end note
+@enduml

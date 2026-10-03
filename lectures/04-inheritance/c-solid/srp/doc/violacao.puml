@@ -1,0 +1,33 @@
+@startuml
+title SRP — Violação
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Aplicacao {
+  +main(args: String[]): void
+}
+class FolhaPagamentoService {
+  -funcionarios: List<Funcionario>
+  +processarFolhaMensal(): void
+  -calcularTotal(): double
+  -gerarRelatorio(total: double): String
+  -enviarRelatorio(relatorio: String): void
+}
+class Funcionario {
+  -nome: String
+  -salarioBase: double
+  +getNome(): String
+  +getSalarioBase(): double
+}
+
+Aplicacao ..> FolhaPagamentoService : cria e usa
+FolhaPagamentoService "1" o-- "*" Funcionario : calcula
+note right of FolhaPagamentoService
+  Violação do SRP:
+  a classe tem três motivos
+  para mudar — cálculo da folha,
+  formatação do relatório e envio
+  de e-mail.
+end note
+@enduml

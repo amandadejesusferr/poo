@@ -1,0 +1,39 @@
+@startuml
+title OCP — Solução
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Aplicacao
+class Produto {
+  -nome: String
+  -categoria: String
+  -valorBase: double
+}
+class CalculadoraDesconto {
+  -regras: Map<String, RegraDesconto>
+  +registrar(categoria: String, regra: RegraDesconto): void
+  +calcular(categoria: String, valorBase: double): double
+}
+interface RegraDesconto {
+  +aplicar(valorBase: double): double
+}
+class DescontoEletronico
+class DescontoVestuario
+class DescontoServico
+class DescontoAssinaturaPremium
+
+Aplicacao ..> CalculadoraDesconto : registra e usa
+Aplicacao ..> Produto
+CalculadoraDesconto o-- RegraDesconto : catálogo
+DescontoEletronico ..|> RegraDesconto
+DescontoVestuario ..|> RegraDesconto
+DescontoServico ..|> RegraDesconto
+DescontoAssinaturaPremium ..|> RegraDesconto
+note right of RegraDesconto
+  Solução OCP:
+  novas regras são adicionadas
+  como implementações, sem
+  modificar CalculadoraDesconto.
+end note
+@enduml

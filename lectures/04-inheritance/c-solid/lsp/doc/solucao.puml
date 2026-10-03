@@ -1,0 +1,35 @@
+@startuml
+title LSP — Solução
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Aplicacao
+class CentralReservas {
+  +cancelarReserva(reserva: ReservaHotel): String
+}
+class ReservaHotel {
+  -codigo: String
+  -status: String
+  -politica: PoliticaCancelamento
+  +cancelar(): String
+  +atualizarStatus(novoStatus: String): void
+}
+interface PoliticaCancelamento {
+  +cancelar(reserva: ReservaHotel): String
+}
+class CancelamentoFlexivel
+class CancelamentoNaoReembolsavel
+
+Aplicacao ..> CentralReservas
+CentralReservas ..> ReservaHotel
+ReservaHotel o-- PoliticaCancelamento : delega
+CancelamentoFlexivel ..|> PoliticaCancelamento
+CancelamentoNaoReembolsavel ..|> PoliticaCancelamento
+note right of PoliticaCancelamento
+  Solução LSP:
+  ReservaHotel mantém um contrato
+  válido; as diferenças de cancelamento
+  são políticas substituíveis.
+end note
+@enduml

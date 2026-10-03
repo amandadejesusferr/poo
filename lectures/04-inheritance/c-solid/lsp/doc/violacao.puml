@@ -1,0 +1,32 @@
+@startuml
+title LSP — Violação
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Aplicacao
+class CentralReservas {
+  +cancelarReserva(reserva: ReservaHotel): String
+}
+class ReservaHotel {
+  -codigo: String
+  -status: String
+  +cancelar(): String
+  +getStatus(): String
+}
+class ReservaBlackFriday {
+  +cancelar(): String
+}
+
+Aplicacao ..> CentralReservas
+Aplicacao ..> ReservaHotel
+Aplicacao ..> ReservaBlackFriday
+CentralReservas ..> ReservaHotel : espera cancelar()
+ReservaBlackFriday --|> ReservaHotel
+note right of ReservaBlackFriday
+  Violação do LSP:
+  a subclasse não pode cumprir
+  o contrato de cancelar();
+  lança UnsupportedOperationException.
+end note
+@enduml

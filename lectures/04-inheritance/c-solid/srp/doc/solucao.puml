@@ -1,0 +1,42 @@
+@startuml
+title SRP — Solução
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Aplicacao {
+  +main(args: String[]): void
+}
+class ProcessadorFolha {
+  -calculadora: CalculadoraFolha
+  -gerador: GeradorRelatorioFolha
+  -mensageiro: MensageiroFolha
+  +processar(funcionarios: List<Funcionario>): void
+}
+class CalculadoraFolha {
+  +calcularTotal(funcionarios: List<Funcionario>): double
+}
+class GeradorRelatorioFolha {
+  +gerar(referencia: LocalDate, funcionarios: List<Funcionario>, total: double): String
+}
+class MensageiroFolha {
+  +enviarParaDiretoria(relatorio: String): void
+}
+class Funcionario {
+  -nome: String
+  -salarioBase: double
+}
+
+Aplicacao ..> ProcessadorFolha : cria e usa
+ProcessadorFolha --> CalculadoraFolha : cálculo
+ProcessadorFolha --> GeradorRelatorioFolha : relatório
+ProcessadorFolha --> MensageiroFolha : envio
+CalculadoraFolha ..> Funcionario
+GeradorRelatorioFolha ..> Funcionario
+note right of ProcessadorFolha
+  Solução SRP:
+  cada classe possui uma única
+  responsabilidade e o processador
+  apenas coordena o fluxo.
+end note
+@enduml

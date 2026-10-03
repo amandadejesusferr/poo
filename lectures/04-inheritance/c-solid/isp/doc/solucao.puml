@@ -1,0 +1,33 @@
+@startuml
+title ISP — Solução
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Aplicacao
+class CentralNotificacoes {
+  -canalSms: CanalSms
+  -canalEmail: CanalEmail
+  +avisarEnvio(numeroSms: String, emailCliente: String): void
+}
+interface CanalSms {
+  +enviarSms(numero: String, mensagem: String): void
+}
+interface CanalEmail {
+  +enviarEmail(destinatario: String, mensagem: String): void
+}
+class GatewaySms
+class GatewayEmail
+
+Aplicacao ..> CentralNotificacoes
+CentralNotificacoes o-- CanalSms
+CentralNotificacoes o-- CanalEmail
+GatewaySms ..|> CanalSms
+GatewayEmail ..|> CanalEmail
+note right of CentralNotificacoes
+  Solução ISP:
+  interfaces pequenas e específicas;
+  cada gateway depende apenas
+  do canal que realmente oferece.
+end note
+@enduml
