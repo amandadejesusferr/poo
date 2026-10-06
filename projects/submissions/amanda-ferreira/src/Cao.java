@@ -2,7 +2,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Cao{
+public abstract class Cao{
     private String nome;
     private String raca;
     private int diaNascimento;
@@ -66,7 +66,7 @@ public class Cao{
         this.anoNascimento = anoNascimento;
     }
 
-    public int getTutor(){
+    public Tutor getTutor(){
         return tutor;
     }
 
@@ -74,8 +74,12 @@ public class Cao{
         this.tutor = tutor;
     }
 
-    public int calcularIdade(int anoAtual){
-        return anoAtual - anoNascimento;
+    public int calcularIdade(){
+        return LocalDate.now().getYear() - anoNascimento;
+    }
+
+    public boolean ehIdoso(){
+        return calcularIdade() >= 7;
     }
 
     public void setVacinado(boolean vacinado){
@@ -86,12 +90,8 @@ public class Cao{
         return vacinado;
     }
 
-    public boolean ehAniversariante(int mesAtual){
-        if(mesAtual == mesNascimento){
-            return true;
-        } else{
-            return false;
-        }
+    public boolean ehAniversariante(){
+        return LocalDate.now().getMonthValue() == mesNascimento;
     }
 
     public String getDataNascimentoFormatada() {
@@ -104,6 +104,11 @@ public class Cao{
 
     @Override
     public String toString(){
-        return "Nome: " + nome + ", Raça: " + raca + ", Data de Nascimento: " + getDataNascimentoFormatada() + ", Idade: " + calcularIdade() + ", Vacinado: " + vacinado + ", Tutor: " + tutor;
+        return "Nome: " + nome + 
+        ", Raça: " + raca + 
+        ", Data de Nascimento: " + getDataNascimentoFormatada() + 
+        ", Idade: " + calcularIdade() + 
+        ", Vacinado: " + vacinado + 
+        ", Tutor: " + (tutor != null ? tutor.getNome() : "N/A");
     }
 }
