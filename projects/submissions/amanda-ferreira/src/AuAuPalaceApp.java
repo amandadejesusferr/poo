@@ -40,7 +40,7 @@ public class AuAuPalaceApp {
 
                     try {
                         System.out.println("\n--- Cadastro do Tutor ---");
-                        System.out.print("CPF do Tutor (exatamente 11 dígitos): ");
+                        System.out.print("CPF do Tutor: ");
                         String cpf = scanner.nextLine().trim();
 
                         if (cpf.length() != 11) {
@@ -60,7 +60,7 @@ public class AuAuPalaceApp {
                         } else {
                             System.out.print("Nome do Tutor: ");
                             String nomeTutor = scanner.nextLine();
-                            System.out.print("Telefone (10 a 11 dígitos): ");
+                            System.out.print("Telefone: ");
                             String telefone = scanner.nextLine();
             
                             tutorEncontrado = new Tutor(nomeTutor, telefone, cpf);
@@ -99,8 +99,10 @@ public class AuAuPalaceApp {
                             novoCao = new CaoPequeno(nomeCao, raca, dia, mes, ano, vacinado, tutorEncontrado);
                         } else if (porte == 2) {
                             novoCao = new CaoMedio(nomeCao, raca, dia, mes, ano, vacinado, tutorEncontrado);
-                        } else {
+                        } else if(porte == 3){
                             novoCao = new CaoGrande(nomeCao, raca, dia, mes, ano, vacinado, tutorEncontrado);
+                        } else {
+                            System.out.println("Porte inválido!");
                         }
 
                         caes[totalCaesCadastrados] = novoCao;

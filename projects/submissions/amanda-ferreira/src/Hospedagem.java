@@ -50,9 +50,9 @@ public class Hospedagem {
 
         double totalServicos = 0.0;
         StringBuilder sbServicos = new StringBuilder();
-        if (temBanho) { totalServicos += 40.0; sbServicos.append("\n  - Banho: R$ 40,00"); }
-        if (temTosa) { totalServicos += 50.0; sbServicos.append("\n  - Tosa: R$ 50,00"); }
-        if (temAdestramento) { totalServicos += 100.0; sbServicos.append("\n  - Adestramento: R$ 100,00"); }
+        if (temBanho) { totalServicos += 50.0; sbServicos.append("\n  - Banho: R$ 50,00"); }
+        if (temTosa) { totalServicos += 30.0; sbServicos.append("\n  - Tosa: R$ 30,00"); }
+        if (temAdestramento) { totalServicos += 80.0; sbServicos.append("\n  - Adestramento: R$ 80,00"); }
         if (totalServicos == 0) { sbServicos.append("\n  - Nenhum serviço extra selecionado"); }
 
         double valorFinal = (subtotalDiarias + taxaIdoso - descontoAniversario) + totalServicos;

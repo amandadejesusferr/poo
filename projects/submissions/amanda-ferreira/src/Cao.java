@@ -82,10 +82,6 @@ public abstract class Cao{
         return calcularIdade() >= 7;
     }
 
-    public void setVacinado(boolean vacinado){
-        this.vacinado = vacinado;
-    }
-
     public boolean getVacinado(){
         return vacinado;
     }
