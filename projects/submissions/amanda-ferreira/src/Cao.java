@@ -105,10 +105,11 @@ public abstract class Cao{
     @Override
     public String toString(){
         return "Nome: " + nome + 
-        ", Raça: " + raca + 
-        ", Data de Nascimento: " + getDataNascimentoFormatada() + 
-        ", Idade: " + calcularIdade() + 
-        ", Vacinado: " + vacinado + 
-        ", Tutor: " + (tutor != null ? tutor.getNome() : "N/A");
+               ", Raça: " + raca + 
+               ", Data de Nascimento: " + getDataNascimentoFormatada() + 
+               ", Idade: " + calcularIdade() + " anos" + 
+               (ehIdoso() ? " (Idoso)" : "") +
+               ", Vacinado: " + (vacinado ? "Sim" : "Não") + 
+               ", Tutor: " + (tutor != null ? tutor.getNome() : "N/A");
     }
 }

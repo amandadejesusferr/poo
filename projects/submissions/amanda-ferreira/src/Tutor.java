@@ -6,6 +6,10 @@ public class Tutor{
     private String cpf;
 
     public Tutor(String nome, String telefone, String cpf){
+        if (telefone == null || telefone.length() < 10 || telefone.length() > 11) {
+            throw new IllegalArgumentException("Erro: Telefone inválido! Deve conter 11 dígitos.");
+        }
+
         this.nome = nome;
         this.telefone = telefone;
         this.cpf = cpf;
@@ -23,7 +27,10 @@ public class Tutor{
         return telefone;
     }
 
-    public void setTelefone(String telefone){
+    public void setTelefone(String telefone) {
+        if (telefone == null || telefone.length() < 10 || telefone.length() > 11) {
+            throw new IllegalArgumentException("Erro: Telefone inválido! Deve conter 11 dígitos.");
+        }
         this.telefone = telefone;
     }
 
@@ -31,7 +38,4 @@ public class Tutor{
         return cpf;
     }
 
-    public void setCpf(String cpf){
-        this.cpf = cpf;
-    }
 }

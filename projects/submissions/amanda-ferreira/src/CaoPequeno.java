@@ -7,7 +7,7 @@ public class CaoPequeno extends Cao{
 
     @Override 
     public String emitirSom(){
-        return "au au (Latido agudo";
+        return "au au (Latido agudo)";
     }
 
     @Override 
